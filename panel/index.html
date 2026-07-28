@@ -1389,12 +1389,24 @@ document.getElementById('install-btn').addEventListener('click', async () => {
 window.addEventListener('appinstalled', () => document.getElementById('install-banner').classList.remove('visible'));
 
 /* ── DEEP LINKS ── */
-const hash = location.hash.replace('#','');
-if (['inicio','clientes','turnos','negocios','mensajes'].includes(hash)) nav(hash);
+const hashSection = location.hash.replace('#','');
+if (['inicio','clientes','turnos','negocios','mensajes'].includes(hashSection)) nav(hashSection);
 
-/* ── INICIO ── */
-cargarDatos(true);
-setInterval(cargarDatos, CONFIG.POLL_INTERVAL);
+/* ── AUTO-LOGIN DEMO — vía parámetro ?key= en la URL ──
+   Si la URL trae ?key=XXXX, se hashea y se guarda como si el
+   usuario hubiese tipeado la contraseña — así el botón de la
+   demo entra directo, sin pedir nada. Agregado 28/07/2026. */
+async function iniciarPanel() {
+  const params = new URLSearchParams(location.search);
+  const keyParam = params.get('key');
+  if (keyParam) {
+    const hashPass = await sha256Hex(keyParam);
+    localStorage.setItem(CONFIG.PWD_KEY, hashPass);
+  }
+  cargarDatos(true);
+  setInterval(cargarDatos, CONFIG.POLL_INTERVAL);
+}
+iniciarPanel();
 
 /* ═══════════════════════════════════════════════
    PUSH NOTIFICATIONS — suscripción y activación
