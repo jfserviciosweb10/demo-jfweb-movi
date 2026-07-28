@@ -1,7 +1,7 @@
 {
-  "name": "Hotel Las Sierras — Panel",
+  "name": "Odontología Gómez — Panel",
   "short_name": "Panel",
-  "description": "description": "Panel de gestión RE-BOMBA — Hotel Las Sierras",
+  "description": "Panel de gestión Alertas Web — Odontología Gómez",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
