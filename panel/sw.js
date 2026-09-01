@@ -1,5 +1,5 @@
-/* RE-BOMBA Panel — Service Worker v1.1 — Odontología Gómez */
-const CACHE_NAME = 'rebomba-panel-odontologia-gomez-v1';
+/* RE-BOMBA Panel — Service Worker v1.2 — Odontología Gómez */
+const CACHE_NAME = 'rebomba-panel-odontologia-gomez-v2';
 const ASSETS = ['./index.html','./offline.html','./manifest.json','./icons/icon-192.png','./icons/icon-512.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS).catch(() => c.add('./index.html'))).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
